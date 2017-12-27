@@ -1,0 +1,26 @@
+filebeat.prospectors:
+- type: log
+  enabled: true
+  paths:
+    - /data/logs/nginx/access/pro.zhihuishu.bbtree.com-*.log
+  tags: ["pro.zhihuishu.bbtree.com"]
+  tail_files: true
+- type: log
+  enabled: true
+  paths:
+    -  /data/logs/nginx/access/papi.bbtree.com-*.log
+  tags: ["papi.bbtree.com"]
+  tail_files: true
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+setup.template.settings:
+  index.number_of_shards: 3
+setup.kibana:
+
+output.redis:
+  hosts: ["10.47.110.131:63798"]
+  key: "phpwannx"
+  db: 0
+  timeout: 5

@@ -1,0 +1,33 @@
+filebeat.prospectors:
+- type: log
+  enabled: true
+  paths:
+    - /data/logs/nginx/access/javaport.bbtree.com-*.log
+  tags: ["javaport.bbtree.com"]
+  tail_files: true
+- type: log
+  enabled: true
+  paths:
+    - /data/logs/nginx/access/japi.bbtree.com-*.log
+  tags: ["japi.bbtree.com"]
+  tail_files: true
+- type: log
+  enabled: true
+  paths:
+    - /data/logs/nginx/access/y2.bbtree.com-*.log
+  tags: ["y2.bbtree.com"]
+  tail_files: true
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+setup.template.settings:
+  index.number_of_shards: 3
+setup.kibana:
+
+output.redis:
+  hosts: ["10.47.110.131:63798"]
+  key: "javawannx"
+  db: 0
+  timeout: 5
+#

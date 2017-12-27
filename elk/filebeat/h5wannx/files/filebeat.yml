@@ -1,0 +1,32 @@
+filebeat.prospectors:
+- type: log
+  enabled: true
+  paths:
+    - /data/logs/nginx/access/www.bbtree.com-access.log
+  tags: ["www.bbtree.com"]
+  tail_files: true
+- type: log
+  enabled: true
+  paths:
+    -  /data/logs/nginx/access/s0.bbtree.com-access-*.log
+  tags: ["s0.bbtree.com"]
+  tail_files: true
+- type: log
+  enabled: true
+  paths:
+    -  /data/logs/nginx/access/auction-static.bbtree.com-access-*.log
+  tags: ["auction-static.bbtree.com"]
+  tail_files: true
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+setup.template.settings:
+  index.number_of_shards: 3
+setup.kibana:
+
+output.redis:
+  hosts: ["10.47.110.131:63798"]
+  key: "h5wannx"
+  db: 0
+  timeout: 5
